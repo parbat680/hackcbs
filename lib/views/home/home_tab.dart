@@ -1,10 +1,12 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:hackcbs/views/home/doctor_list.dart';
 
 import 'package:hackcbs/views/home/home.dart';
 import 'package:hackcbs/views/home/medication.dart';
 
 import 'package:hackcbs/views/home/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:hackcbs/widgets/doctor_list_card.dart';
 
 class HomeTabPage extends StatefulWidget {
   const HomeTabPage({super.key});
@@ -29,7 +31,7 @@ class HomeTabPageState extends State<HomeTabPage>
         controller: _tabController,
         children: [
           const HomePage(),
-          const HomePage(),
+          const DoctorListScreen(),
           const MedicationScreen(),
           ProfilePage(),
         ],
