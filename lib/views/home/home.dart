@@ -1,3 +1,4 @@
+import 'package:hackcbs/utils/location.dart';
 import 'package:hackcbs/utils/text_sizes.dart';
 import 'package:hackcbs/views/home/searchproducts.dart';
 import 'package:hackcbs/views/home/time_slot_selection.dart';
@@ -24,6 +25,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    print(determinePosition());
     super.initState();
   }
 
@@ -128,40 +130,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                constraints: const BoxConstraints(
-                  minHeight: 60,
-                  maxHeight: 100,
-                ),
-                width: MediaQuery.of(context).size.width,
-                child: ListView.builder(
-                    itemCount: selectCat.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: ((context, index) {
-                      return Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Obx(
-                            () => ChoiceChip(
-                                label: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Text(
-                                    selectCat[index],
-                                    style: poppinsFont.copyWith(
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                                onSelected: (val) {
-                                  if (val) {
-                                    selectIndex.value = index;
-                                  }
-                                },
-                                selected:
-                                    selectIndex.value == index ? true : false),
-                          ));
-                    })),
-              ),
-              Text("Nearby  ", style: headingBold),
+              Text("Nearby doctors", style: headingBold.copyWith(fontSize: 22)),
               Container(
                 constraints: const BoxConstraints(
                   minHeight: 280,
@@ -180,9 +149,31 @@ class _HomePageState extends State<HomePage> {
                       );
                     })),
               ),
-              Text("Popular  ", style: headingBold),
+              SizedBox(
+                height: 20,
+              ),
+              Text("Recently visited",
+                  style: headingBold.copyWith(fontSize: 22)),
               const SizedBox(
                 height: 10,
+              ),
+              Container(
+                constraints: const BoxConstraints(
+                  minHeight: 280,
+                  maxHeight: 300,
+                ),
+                width: MediaQuery.of(context).size.width,
+                child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: 5,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: ((context, index) {
+                      return DoctorCard(
+                        onTap: () {
+                          Get.to(() => TimeSlotBooking());
+                        },
+                      );
+                    })),
               ),
             ],
           ),

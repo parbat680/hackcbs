@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hackcbs/utils/text_sizes.dart';
+import 'package:hackcbs/views/home/priscription_screen.dart';
 import 'package:hackcbs/widgets/doctor_list_card.dart';
 
 class DoctorListScreen extends StatefulWidget {
@@ -42,12 +44,7 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
                           itemBuilder: (BuildContext, index) {
                             return GestureDetector(
                               onTap: () {
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => SlotTimeBook(
-                                //               doc: snapshot.data![index],
-                                //             )));
+                                Get.to(() => PriscriptionScreen());
                               },
                               child: DoctorListCard(
                                   title: "Dr. Ankita",

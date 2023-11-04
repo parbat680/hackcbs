@@ -76,10 +76,10 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                       ),
                       FastChoiceChips(
                         name: 'choice_chips',
-                        labelText: 'choiceChips',
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 20, horizontal: 4),
+                        chipPadding: const EdgeInsets.all(8),
                         alignment: WrapAlignment.center,
-                        chipPadding: const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 8),
                         onSaved: (value) {
                           days = value!;
                         },
@@ -159,7 +159,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                                 ))
                             .toList(),
                       ),
-                      LabelText("uploadImage}"),
+                      LabelText("uploadImage"),
                       Container(
                           width: double.infinity,
                           padding: const EdgeInsets.all(10),
@@ -215,7 +215,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                             minimumSize: const Size(double.infinity, 50),
                             backgroundColor: Colors.green),
                         child: Text(
-                          "addMedicine",
+                          "Add Medicine",
                           style: poppinsFont.copyWith(
                               color: Colors.white, fontWeight: FontWeight.w400),
                         ),

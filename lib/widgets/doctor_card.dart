@@ -66,6 +66,15 @@ class DoctorCard extends StatelessWidget {
                   ),
                 ),
                 Center(
+                  child: Text(
+                    "Sharda Clinic",
+                    style:
+                        poppinsFont.copyWith(fontSize: 16, color: Colors.black),
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Center(
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [

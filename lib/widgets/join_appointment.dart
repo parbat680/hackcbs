@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hackcbs/utils/text_sizes.dart';
+import 'package:hackcbs/views/home/live_appointment.dart';
 
 class JoinAppointment extends StatelessWidget {
   const JoinAppointment({Key? key}) : super(key: key);
@@ -61,7 +63,9 @@ class JoinAppointment extends StatelessWidget {
           ],
         ),
         trailing: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.to(() => AppointmentLive());
+          },
           child: Text(
             "Book",
             style: poppinsFont.copyWith(color: Colors.white),

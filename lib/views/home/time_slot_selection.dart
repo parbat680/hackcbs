@@ -1,5 +1,7 @@
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hackcbs/views/home/live_appointment.dart';
 
 import '../../widgets/join_appointment.dart';
 
@@ -45,13 +47,7 @@ class TimeSlotBooking extends StatelessWidget {
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (BuildContext context, index) {
                       return GestureDetector(
-                          onTap: () {
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => AppointmentLive()));
-                          },
-                          child: JoinAppointment());
+                          onTap: () {}, child: JoinAppointment());
                     }),
                 SizedBox(
                   height: 20.0,

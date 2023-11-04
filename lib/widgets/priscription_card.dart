@@ -14,12 +14,13 @@ class _PriscriptionCardState extends State<PriscriptionCard> {
     return Column(
       children: [
         Container(
+          margin: EdgeInsets.all(20),
           child: Column(
             children: [
               Row(
                 children: [
                   Text(
-                    "Date",
+                    "Date: ",
                     style: poppinsFont.copyWith(fontWeight: FontWeight.w600),
                   ),
                   Text(
@@ -28,10 +29,13 @@ class _PriscriptionCardState extends State<PriscriptionCard> {
                   ),
                 ],
               ),
+              SizedBox(
+                height: 10,
+              ),
               Row(
                 children: [
                   Text(
-                    "Time",
+                    "Time: ",
                     style: poppinsFont.copyWith(fontWeight: FontWeight.w600),
                   ),
                   Text(
@@ -40,9 +44,16 @@ class _PriscriptionCardState extends State<PriscriptionCard> {
                   ),
                 ],
               ),
+              SizedBox(
+                height: 10,
+              ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 16)),
                     onPressed: () {},
                     child: Text(
                       "view receipt",
@@ -51,8 +62,9 @@ class _PriscriptionCardState extends State<PriscriptionCard> {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                    ),
+                        backgroundColor: Colors.red,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 16)),
                     onPressed: () {},
                     child: Text(
                       "share receipt",
