@@ -1,3 +1,4 @@
+import 'package:hackcbs/models/doctorModel.dart';
 import 'package:hackcbs/utils/text_sizes.dart';
 
 import 'package:flutter/material.dart';
@@ -5,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DoctorCard extends StatelessWidget {
-  DoctorCard({Key? key, required this.onTap}) : super(key: key);
-
+  DoctorCard({Key? key, required this.onTap, required this.doc})
+      : super(key: key);
+  Doctor doc;
   VoidCallback onTap;
   RxBool isFav = false.obs;
 
@@ -58,7 +60,7 @@ class DoctorCard extends StatelessWidget {
                 ),
                 Center(
                   child: Text(
-                    "Dr. Akansha",
+                    doc.firstName + doc.lastName,
                     style:
                         headingBold.copyWith(fontSize: 16, color: Colors.black),
                     textAlign: TextAlign.center,
@@ -67,30 +69,30 @@ class DoctorCard extends StatelessWidget {
                 ),
                 Center(
                   child: Text(
-                    "Sharda Clinic",
+                    doc.hospitalAffiliations[0],
                     style:
                         poppinsFont.copyWith(fontSize: 16, color: Colors.black),
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                Center(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "\$",
-                        style: headingBold.copyWith(
-                            fontSize: 16, color: Colors.green),
-                      ),
-                      Text(
-                        "25.00/ hour",
-                        style: poppinsFont.copyWith(
-                            fontSize: 16, color: Colors.black),
-                      ),
-                    ],
-                  ),
-                )
+                // Center(
+                //   child: Row(
+                //     mainAxisSize: MainAxisSize.min,
+                //     children: [
+                //       Text(
+                //         "Available: ",
+                //         style: headingBold.copyWith(
+                //             fontSize: 16, color: Colors.green),
+                //       ),
+                //       Text(
+                //         "${doc.workSchedule.daysOfWeek[0]} - ${doc.workSchedule.daysOfWeek.last}",
+                //         style: poppinsFont.copyWith(
+                //             fontSize: 16, color: Colors.black),
+                //       ),
+                //     ],
+                //   ),
+                // )
               ],
             ),
           ),

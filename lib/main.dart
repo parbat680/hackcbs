@@ -30,8 +30,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeDecoder.decodeThemeData(theme),
-      initialRoute: '/home',
-      title: "Doctor Appointment App",
+      initialRoute: '/splash',
+      title: "Sanjivani",
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case '/splash':

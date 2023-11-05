@@ -1,3 +1,4 @@
+import 'package:hackcbs/repository/handlers/user_repo.dart';
 import 'package:hackcbs/utils/text_sizes.dart';
 
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
                   Container(
                     alignment: Alignment.center,
                     child: Text(
-                      "Doctor Booking App",
+                      "Sanjivani",
                       style: headingBold.copyWith(
                           fontSize: 26, fontWeight: FontWeight.w500),
                     ),
@@ -63,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                   Container(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      "Your go-to app for all your gardening essentials.",
+                      "Your go-to app for all your medical essentials.",
                       style: poppinsFont.copyWith(
                           fontSize: 16, fontWeight: FontWeight.w200),
                     ),
@@ -124,15 +125,24 @@ class _LoginPageState extends State<LoginPage> {
                     height: 20,
                   ),
                   ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {}
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        UserRepository user = UserRepository();
+                        bool auth =
+                            await user.login(_email.text, _password.text);
+                        if (auth) {
+                          Get.offAllNamed('/home');
+                        }
+                      }
                     },
                     style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 50),
-                        maximumSize: const Size(double.infinity, 50)),
+                      minimumSize: const Size(double.infinity, 50),
+                      maximumSize: const Size(double.infinity, 50),
+                    ),
                     child: Text(
                       "Login",
-                      style: poppinsFont.copyWith(fontSize: 18),
+                      style: poppinsFont.copyWith(
+                          fontSize: 18, color: Colors.white),
                     ),
                   ),
 

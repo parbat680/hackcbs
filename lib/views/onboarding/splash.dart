@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-
+import 'package:hackcbs/repository/handlers/user_repo.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -19,9 +18,16 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
   }
 
-  timer() async {
-    Future.delayed(const Duration(seconds: 5))
-        .then((value) => Get.offAllNamed('/login'));
+  timer() {
+    Future.delayed(const Duration(seconds: 5)).then((value) async {
+      UserRepository user = UserRepository();
+
+      if (await user.getToken() != null) {
+        Get.offAllNamed('/home');
+      } else {
+        Get.offAllNamed('/login');
+      }
+    });
   }
 
   @override

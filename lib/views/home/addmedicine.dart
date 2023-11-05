@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:developer';
 
+import 'package:hackcbs/repository/handlers/addmedicine.dart';
 import 'package:hackcbs/utils/image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fast_forms/flutter_fast_forms.dart';
@@ -20,7 +21,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
 
   File? _image;
   RxBool ispicked = false.obs;
-  List<TimeOfDay> dosage_time = [];
+  List<String> dosage_time = [];
   List days = [];
   String? name, dosage;
 
@@ -124,40 +125,74 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                      FastTimePicker(
-                        name: 'time',
-                        labelText: 'dosageTime',
-                        onChanged: (TimeOfDay? value) {
-                          if (!dosage_time.contains(value)) {
-                            dosage_time.add(value!);
+                      FastCheckbox(
+                        name: 'beforelunch',
+                        labelText: 'Timing',
+                        titleText: 'Before Lunch',
+                        onChanged: (value) {
+                          if (value! && !dosage_time.contains("Before Lunch")) {
+                            dosage_time.add("Before Lunch");
+                          } else {
+                            dosage_time.remove("Before Lunch");
                           }
+
                           setState(() {});
-                        },
-                        validator: (value) {
-                          if (dosage_time.isEmpty) {
-                            return "Selct atleast one slot";
-                          }
-                          return null;
                         },
                       ),
                       const SizedBox(
                         height: 20,
                       ),
-                      Wrap(
-                        spacing: 10,
-                        children: dosage_time
-                            .map((e) => Container(
-                                  child: Container(
-                                    padding: const EdgeInsets.all(10),
-                                    margin: EdgeInsets.all(0),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.blue.shade200,
-                                    ),
-                                    child: Text("12:00-1:00"),
-                                  ),
-                                ))
-                            .toList(),
+                      FastCheckbox(
+                        name: 'afterlunch',
+                        labelText: 'Timing',
+                        titleText: 'After Lunch',
+                        onChanged: (value) {
+                          if (value! && !dosage_time.contains("After Lunch")) {
+                            dosage_time.add("After Lunch");
+                          } else {
+                            dosage_time.remove("After Lunch");
+                          }
+
+                          setState(() {});
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      FastCheckbox(
+                        name: 'beforedinner',
+                        labelText: 'Timing',
+                        titleText: 'Before Dinner',
+                        onChanged: (value) {
+                          if (value! &&
+                              !dosage_time.contains("Before Dinner")) {
+                            dosage_time.add("Before Dinner");
+                          } else {
+                            dosage_time.remove("Before Dinner");
+                          }
+
+                          setState(() {});
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      FastCheckbox(
+                        name: 'afterdinner',
+                        labelText: 'Timing',
+                        titleText: 'After Dinner',
+                        onChanged: (value) {
+                          if (value! && !dosage_time.contains("After Dinner")) {
+                            dosage_time.add("After Dinner");
+                          } else {
+                            dosage_time.remove("After Dinner");
+                          }
+
+                          setState(() {});
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
                       ),
                       LabelText("uploadImage"),
                       Container(
@@ -196,19 +231,21 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                               _image != null) {
                             _formKey.currentState!.save();
                             log("$name $dosage $dosage_time $days");
-                            List time = [];
-                            for (int i = 0; i < dosage_time.length; i++) {
-                              time.add(
-                                  "${dosage_time[i].hour}:${dosage_time[i].minute}");
-                            }
+
                             context.loaderOverlay.show();
-                            // try {
-                            //   await MedicineHandler.addMedicines(name!, dosage!,
-                            //       days.join(","), time.join(","), _image!);
-                            // } catch (e) {
-                            //   log(e.toString());
-                            // }
-                            // context.loaderOverlay.hide();
+
+                            try {
+                              await AddMedicine.add(_image, {
+                                "name": name,
+                                "days": days.join(","),
+                                "duration": dosage,
+                                "image": ""
+                              });
+                            } catch (e) {
+                              print(e);
+                            } finally {
+                              context.loaderOverlay.hide();
+                            }
                           }
                         },
                         style: ElevatedButton.styleFrom(
